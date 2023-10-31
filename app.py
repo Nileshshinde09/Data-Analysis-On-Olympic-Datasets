@@ -56,7 +56,10 @@ if menu=='Overall Analysis':
         st.header("Nations")
         st.title(nations)
 
-    nations_over_time = df.drop_duplicates(['Year', 'region'])['Year'].value_counts().reset_index().sort_values('index')
+    try:
+        nations_over_time = df.drop_duplicates(['Year', 'region'])['Year'].value_counts().reset_index().sort_values('index')
+    except Exception as e:
+        print("An error occurred:", e)
     nations_over_time.rename(columns={'index': 'Edition', 'Year': 'region'}, inplace=True)
     fig = px.line(nations_over_time, x="Edition", y="region")
     st.title("Participating Nations over the years")
