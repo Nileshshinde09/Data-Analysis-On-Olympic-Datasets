@@ -2,4 +2,5 @@ streamlit
 plotly
 seaborn
 matplotlib
-
+zipfile
+io
