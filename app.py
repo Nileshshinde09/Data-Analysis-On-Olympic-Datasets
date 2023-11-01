@@ -58,27 +58,27 @@ if menu=='Overall Analysis':
         st.title(nations)
 
     
-    
-    nations_over_time =df.drop_duplicates(['Year', 'region'])['Year'].value_counts().reset_index().sort_values('index')
+    st.table(df)
+    # nations_over_time =df.drop_duplicates(['Year', 'region'])['Year'].value_counts().reset_index().sort_values('index')
 
-    nations_over_time.rename(columns={'index': 'Edition', 'Year': 'region'}, inplace=True)
-    fig = px.line(nations_over_time, x="Edition", y="region")
-    st.title("Participating Nations over the years")
-    st.plotly_chart(fig)
-
-    
-    st.title("Athletes over the years")
-    athlete_over_time = df.drop_duplicates(['Year', 'Name'])['Year'].value_counts().reset_index().sort_values('index')
-    athlete_over_time.rename(columns={'index': 'Edition', 'Year': 'Athlete'}, inplace=True)
-    fig = px.line(athlete_over_time, x="Edition", y="Athlete")
-    st.plotly_chart(fig)
+    # nations_over_time.rename(columns={'index': 'Edition', 'Year': 'region'}, inplace=True)
+    # fig = px.line(nations_over_time, x="Edition", y="region")
+    # st.title("Participating Nations over the years")
+    # st.plotly_chart(fig)
 
     
-    st.title("No. of Events over time(Every Sport)")
-    fig,ax = plt.subplots(figsize=(20,20))
-    x = df.drop_duplicates(['Year', 'Sport', 'Event'])
-    ax = sns.heatmap(x.pivot_table(index='Sport', columns='Year', values='Event', aggfunc='count').fillna(0).astype('int'),annot=True)
-    st.pyplot(fig)
+    # st.title("Athletes over the years")
+    # athlete_over_time = df.drop_duplicates(['Year', 'Name'])['Year'].value_counts().reset_index().sort_values('index')
+    # athlete_over_time.rename(columns={'index': 'Edition', 'Year': 'Athlete'}, inplace=True)
+    # fig = px.line(athlete_over_time, x="Edition", y="Athlete")
+    # st.plotly_chart(fig)
+
+    
+    # st.title("No. of Events over time(Every Sport)")
+    # fig,ax = plt.subplots(figsize=(20,20))
+    # x = df.drop_duplicates(['Year', 'Sport', 'Event'])
+    # ax = sns.heatmap(x.pivot_table(index='Sport', columns='Year', values='Event', aggfunc='count').fillna(0).astype('int'),annot=True)
+    # st.pyplot(fig)
 
 if menu=='Athlete wise Alaysis':
     # df=pd.read_pickle("maindf.pkl")
