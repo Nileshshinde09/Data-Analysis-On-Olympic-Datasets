@@ -1,23 +1,23 @@
 import numpy as np
 import pandas as pd
-import zipfile
+# import zipfile
 import pandas as pd
-from io import BytesIO
+# from io import BytesIO
 def process_data():
-    with zipfile.ZipFile('dataset.zip', 'r') as zipf:
-        file_list = zipf.namelist()
+    # with zipfile.ZipFile('dataset.zip', 'r') as zipf:
+    #     file_list = zipf.namelist()
 
-        with zipf.open(file_list[0]) as file:
-            content1 = file.read()
-        with zipf.open(file_list[1]) as file:
-            content2 = file.read()
+    #     with zipf.open(file_list[0]) as file:
+    #         content1 = file.read()
+    #     with zipf.open(file_list[1]) as file:
+    #         content2 = file.read()
 
-    # Convert the content to a pandas DataFrame
-    df = pd.read_csv(BytesIO(content1))
-    df_regions=pd.read_csv(BytesIO(content2))
+    # # Convert the content to a pandas DataFrame
+    # df = pd.read_csv(BytesIO(content1))
+    # df_regions=pd.read_csv(BytesIO(content2))
     
-    # df= pd.read_csv('dataset/athlete_events.csv')
-    # df_regions= pd.read_csv('dataset/noc_regions.csv')
+    df= pd.read_csv('dataset/athlete_events.csv')
+    df_regions= pd.read_csv('dataset/noc_regions.csv')
     df['Medal']=df['Medal'].fillna(0)
     df=df.merge(df_regions,how='left',on='NOC')
     df.drop_duplicates(['Team', 'NOC', 'Games', 'Year', 'City', 'Sport', 'Event', 'Medal'],inplace=True)
