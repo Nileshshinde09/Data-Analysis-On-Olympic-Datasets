@@ -13,13 +13,13 @@ if menu=='Medal Tally':
     years,countries=handler.getvalues()
     selected_year = st.sidebar.selectbox("Select Year",years)
     selected_country = st.sidebar.selectbox("Select Country", countries)
-    if selected_year is 'Overall' and selected_country is 'Overall':
+    if selected_year == 'Overall' and selected_country == 'Overall':
         st.header("Overall Medal Tally")
-    if selected_year is 'Overall' and selected_country is not 'Overall':
+    if selected_year == 'Overall' and selected_country != 'Overall':
         st.header(f"Overall Years Medal Tally Of {selected_country}")
-    if selected_year is not 'Overall' and selected_country is 'Overall':
+    if selected_year != 'Overall' and selected_country == 'Overall':
         st.header(f"Year {selected_year} Olympics Medal Tally Of Overall Countries")
-    if selected_year is not 'Overall' and selected_country is not 'Overall':
+    if selected_year != 'Overall' and selected_country != 'Overall':
         st.header(f"Year {selected_year} Olympics Medal Tally Of {selected_country}")
     st.table(data=handler.medalTally(selected_year,selected_country))
 
@@ -58,11 +58,7 @@ if menu=='Overall Analysis':
 
     try:
         # Check for non-numeric values
-        non_numeric = df.apply(lambda col: pd.to_numeric(col, errors='coerce').isna()).any()
-        print(non_numeric)
-
-        # Filter out rows with non-numeric values
-        df = df[~non_numeric]
+    
         nations_over_time = df.drop_duplicates(['Year', 'region'])['Year'].value_counts().reset_index().sort_values('index')
     except Exception as e:
         print("An error occurred:", e)
@@ -121,9 +117,9 @@ if menu=='Athlete wise Alaysis':
     new_df = df.drop_duplicates(['Name', 'region'])
     new_df['Medal'].fillna('No Medal', inplace=True)
     selectedsport=st.selectbox('Select a Sport',sport_list)
-    if selectedsport is 'Overall':
+    if selectedsport == 'Overall':
         temp=new_df
-    if selectedsport is not 'Overall':
+    if selectedsport != 'Overall':
         temp=new_df[new_df['Sport']==selectedsport]
     # temp = handler.weightVheightt(selectedsport)
     fig,ax = plt.subplots()
