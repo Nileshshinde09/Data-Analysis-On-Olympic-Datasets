@@ -13,13 +13,13 @@ if menu=='Medal Tally':
     years,countries=handler.getvalues()
     selected_year = st.sidebar.selectbox("Select Year",years)
     selected_country = st.sidebar.selectbox("Select Country", countries)
-    if selected_year == 'Overall' and selected_country == 'Overall':
+    if selected_year is 'Overall' and selected_country is 'Overall':
         st.header("Overall Medal Tally")
-    if selected_year == 'Overall' and selected_country != 'Overall':
+    if selected_year is 'Overall' and selected_country is not 'Overall':
         st.header(f"Overall Years Medal Tally Of {selected_country}")
-    if selected_year != 'Overall' and selected_country == 'Overall':
+    if selected_year is not 'Overall' and selected_country is 'Overall':
         st.header(f"Year {selected_year} Olympics Medal Tally Of Overall Countries")
-    if selected_year != 'Overall' and selected_country != 'Overall':
+    if selected_year is not 'Overall' and selected_country is not 'Overall':
         st.header(f"Year {selected_year} Olympics Medal Tally Of {selected_country}")
     st.table(data=handler.medalTally(selected_year,selected_country))
 
@@ -56,12 +56,7 @@ if menu=='Overall Analysis':
         st.header("Nations")
         st.title(nations)
 
-    try:
-        # Check for non-numeric values
-    
-        nations_over_time = df.drop_duplicates(['Year', 'region'])['Year'].value_counts().reset_index().sort_values('index')
-    except Exception as e:
-        print("An error occurred:", e)
+    nations_over_time = df.drop_duplicates(['Year', 'region'])['Year'].value_counts().reset_index().sort_values('index')
     nations_over_time.rename(columns={'index': 'Edition', 'Year': 'region'}, inplace=True)
     fig = px.line(nations_over_time, x="Edition", y="region")
     st.title("Participating Nations over the years")
@@ -117,9 +112,9 @@ if menu=='Athlete wise Alaysis':
     new_df = df.drop_duplicates(['Name', 'region'])
     new_df['Medal'].fillna('No Medal', inplace=True)
     selectedsport=st.selectbox('Select a Sport',sport_list)
-    if selectedsport == 'Overall':
+    if selectedsport is 'Overall':
         temp=new_df
-    if selectedsport != 'Overall':
+    if selectedsport is not 'Overall':
         temp=new_df[new_df['Sport']==selectedsport]
     # temp = handler.weightVheightt(selectedsport)
     fig,ax = plt.subplots()
